@@ -43,7 +43,17 @@ export class WeatherService {
           };
         }),
         toArray(),
-        share()
+        share(),
+        tap(
+          () => {
+            this.notificationService.addSuccess('Got your weather forcast');
+          }
+        ),
+        catchError((err) => {
+          this.notificationService.addError('Failed to get weather on your location');
+
+          return throwError(err);
+        })
       );
   }
 
