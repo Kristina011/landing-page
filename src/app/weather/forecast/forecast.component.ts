@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {WeatherService} from '../weather.service';
+
+interface ForecastData {
+  dateString: string;
+  temp: number;
+}
 
 @Component({
   selector: 'app-forecast',
@@ -16,7 +21,7 @@ export class ForecastComponent implements OnInit {
   //   });
   // }
 
-  forecast$: Observable<{ dateString: string; temp: number; }[]>;
+  forecast$: Observable<ForecastData[]>;
 
   constructor(private weatherService: WeatherService) {
     this.forecast$ = weatherService.getForecast();
